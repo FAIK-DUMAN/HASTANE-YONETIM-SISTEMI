@@ -20,7 +20,7 @@ try:
     hemsire3 = Hemsire(8, "Nurse Cemile", "Deniz", "Acil", 6800, 42, "Acil Sertifikası", "Uşak Üniversitesi Eğitim ve Araştırma Hastanesi")
 
     # Hasta sınıfından örnekler oluşturuluyor
-    hasta1 = Hasta(1, "Mehmet efe", "Demirel", "1992-05-12", "Covid-19", "Aşı Tedavisi")
+    hasta1 = Hasta(1, "Mehmet Efe", "Demirel", "1992-05-12", "Covid-19", "Aşı Tedavisi")
     hasta2 = Hasta(2, "Akif", "Duman", "1988-09-20", "Kalp Rahatsızlığı", "Cerrahi Müdahale")
     hasta3 = Hasta(3, "Ömer", "Demir", "2000-01-01", "Soğuk Algınlığı", "Dinlenme ve İlaç")
 
@@ -56,47 +56,47 @@ try:
     df_personel["Maaş"] = pd.to_numeric(df_personel["Maaş"], errors='coerce').fillna(0).astype(int)
 
     # Uzmanlık alanlarına göre doktor sayısı gösteriliyor
-    print("========================================================================================")
+    print("="*80)
     print("Uzmanlık Alanlarına Göre Doktor Sayısı:")
     doktor_grup = df_personel[df_personel["Uzmanlık"] != 0].groupby('Uzmanlık').size()
     for uzmanlik, sayi in doktor_grup.items():
-        print(f"{uzmanlik}: {sayi}")
-    print("========================================================================================\n")
+        print(f"{uzmanlik: <20} : {sayi}")
+    print("="*80)
 
     # 5 yıldan fazla deneyime sahip doktor sayısı gösteriliyor
     deneyim_fazla_5 = df_personel[df_personel['Deneyim Yılı'] > 5]['Ad'].count()
     print(f"5 Yıldan Fazla Deneyime Sahip Doktor Sayısı: {deneyim_fazla_5}")
-    print("========================================================================================\n")
+    print("="*80)
 
     # Hastalar alfabetik olarak sıralanıyor ve gösteriliyor
     print("Alfabetik Olarak Sıralanmış Hastalar:")
     df_patient_sorted = df_patient.sort_values(by=["Hasta Adı"])
     print(df_patient_sorted.to_string(index=False))
-    print("========================================================================================\n")
+    print("="*80)
 
     # Maaşı 7000 TL üzerinde olan personeller gösteriliyor
     print("Maaşı 7000 TL Üzerinde Olan Personeller:")
     maasi_7000_ust = df_personel[df_personel['Maaş'] > 7000]
     print(maasi_7000_ust.to_string(index=False))
-    print("========================================================================================\n")
+    print("="*80)
 
     # Doğum tarihi 1990 ve sonrası olan hastalar gösteriliyor
     print("Doğum Tarihi 1990 ve Sonrası Olan Hastalar:")
     df_patient['Doğum Tarihi'] = pd.to_datetime(df_patient['Doğum Tarihi'], errors='coerce')
     dogum_1990_sonrasi = df_patient[df_patient['Doğum Tarihi'] >= '1990-01-01']
     print(dogum_1990_sonrasi.to_string(index=False))
-    print("========================================================================================\n")
+    print("="*80)
 
     # Seçilen sütunlarla yeni DataFrame'ler oluşturuluyor
     print("Yeni Personel DataFrame:")
     yeni_df_personel = df_personel[['Ad', 'Soyad', 'Departman', 'Maaş', 'Uzmanlık', 'Deneyim Yılı']]
     print(yeni_df_personel.to_string(index=False))
-    print("========================================================================================\n")
+    print("="*80)
 
     print("Yeni Hasta DataFrame:")
     yeni_df_patient = df_patient[['Hasta Adı', 'Hasta Soyadı', 'Hastalık', 'Tedavi']]
     print(yeni_df_patient.to_string(index=False))
-    print("========================================================================================\n")
+    print("="*80)
 
 except Exception as e:
     print(f"Bir hata oluştu: {e}")
